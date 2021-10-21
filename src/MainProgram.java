@@ -54,6 +54,11 @@ public class MainProgram {
         }
 
         //todo: salvar os dados num arquivo
+        writeToFile(data);
+        returnToMenu();
+    }
+
+    private static void writeToFile(List<String> data) {
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
         try {
@@ -85,20 +90,32 @@ public class MainProgram {
                 }
             }
         }
-        returnToMenu();
     }
+
 
     private static void searchMovieScreen() {
         var mScanner = new Scanner(System.in);
         System.out.print("Digite o ID do filme: ");
         var uuid = mScanner.nextLine();
+        var info = searchInFile(uuid);
+        if (info != null && info.length > 0) {
+            System.out.println("\n=====Informações do Filme=====");
+            System.out.println("UUID: " + info[0]);
+            System.out.println("Nome: " + info[1]);
+            System.out.println("Gênero: " + info[2]);
+            System.out.println("Lançamento: " + info[3]);
+            System.out.println("Diretor: " + info[4]);
+        }
+        returnToMenu();
+    }
 
+    private static String[] searchInFile(String uuid) {
         FileReader fR = null;
         BufferedReader bR = null;
+        String[] info = null;
         try {
             fR = new FileReader("/home/lt-sw-195/Área de Trabalho/db.csv");
             bR = new BufferedReader(fR);
-            String[] info = null;
             while (bR.ready()) {
                 var line = bR.readLine().strip();
                 if (!line.isEmpty() || line.isBlank()) {
@@ -108,17 +125,10 @@ public class MainProgram {
                     }
                 }
             }
-            if (info != null && info.length > 0) {
-                System.out.println("\n=====Informações do Filme=====");
-                System.out.println("UUID: " + info[0]);
-                System.out.println("Nome: " + info[1]);
-                System.out.println("Gênero: " + info[2]);
-                System.out.println("Lançamento: " + info[3]);
-                System.out.println("Diretor: " + info[4]);
-            }
         } catch (Exception e) {
             System.out.println("===============================");
             System.out.println("Ocorreu um problema na leitura do arquivo.");
+            info = null;
         } finally {
             try {
                 if (fR != null && bR != null) {
@@ -128,11 +138,16 @@ public class MainProgram {
             } catch (Exception e) {
                 e.getStackTrace();
             }
+            return info;
         }
-        returnToMenu();
     }
 
     private static void listMoviesScreen() {
+        listMovies();
+        returnToMenu();
+    }
+
+    private static void listMovies() {
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
         try {
@@ -160,7 +175,6 @@ public class MainProgram {
                 e.getStackTrace();
             }
         }
-        returnToMenu();
     }
 
     public static void returnToMenu() {
@@ -172,7 +186,7 @@ public class MainProgram {
     }
 
     public static void main(String[] args) {
-        var scanner = new Scanner(System.in);
+
         String movieName = "";
         String movieGenre = "";
         String movieDate = "";
