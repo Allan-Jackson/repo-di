@@ -2,7 +2,7 @@ package screens;
 
 public interface Screen {
     /**
-     * método responsável por exibir a tela.
+     * método responsável por inicializar a tela.
      */
-    public void show();
+    public void initialize();
 }

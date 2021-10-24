@@ -4,9 +4,10 @@ import repodi.FileDataSource;
 
 import java.util.Scanner;
 
+//todo: tratamento da exceção de searchInFile
 public class SearchMovieScreen implements Screen{
     @Override
-    public void show() {
+    public void initialize() {
         FileDataSource fileDataSrc = new FileDataSource();
         var mScanner = new Scanner(System.in);
         System.out.print("Digite o ID do filme: ");
@@ -20,15 +21,5 @@ public class SearchMovieScreen implements Screen{
             System.out.println("Lançamento: " + info[3]);
             System.out.println("Diretor: " + info[4]);
         }
-        returnToMenu();
-    }
-
-    private void returnToMenu() {
-        Screen menu = new MenuScreen();
-        var mScanner = new Scanner(System.in);
-        System.out.println("\nTecle \"Enter\" para voltar ao menu...");
-        mScanner.nextLine();
-        System.out.println("\n\n\n");
-        menu.show();
     }
 }

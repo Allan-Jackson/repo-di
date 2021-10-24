@@ -4,19 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Scanner;
 
+//todo: utilizar FileDataSource para manipular o arquivo com os dados
 public class ListMovieScreen implements Screen{
 
-    private void returnToMenu() {
-        Screen menu = new MenuScreen();
-        var mScanner = new Scanner(System.in);
-        System.out.println("\nTecle \"Enter\" para voltar ao menu...");
-        mScanner.nextLine();
-        System.out.println("\n\n\n");
-        menu.show();
-    }
-
     @Override
-    public void show() {
+    public void initialize() {
 
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
@@ -45,6 +37,5 @@ public class ListMovieScreen implements Screen{
                 e.getStackTrace();
             }
         }
-        returnToMenu();
     }
 }
