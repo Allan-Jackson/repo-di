@@ -1,4 +1,4 @@
-package screens;
+package app.console;
 
 @FunctionalInterface
 public interface ChoiceHandler {
