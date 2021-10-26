@@ -25,7 +25,7 @@ public class SearchMovieScreen extends BaseScreen{
             }else{
                 System.out.println("Filme não encontrado");
             }
-        }catch (IOException e){
+        }catch (IOException e){ //todo: criar exceção de MovieNotFound
             System.out.println("===============================");
             System.out.println("Ocorreu um problema na leitura do arquivo.");
         }

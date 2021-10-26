@@ -9,7 +9,7 @@ import java.util.UUID;
 //todo; utilizar DI no filename e deixar o tratamento da exceção para quem chamar
 public class FileDataSource {
     public void saveMovie(Movie movie) throws IOException{
-        FileWriter fileWriter = new FileWriter("/home/lt-sw-195/Área de Trabalho/db.csv", true);
+        FileWriter fileWriter = new FileWriter(PropertyUtils.getFile("MOVIE_DATABASE_FILENAME"), true);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
         //cria o ID do filme
@@ -27,7 +27,7 @@ public class FileDataSource {
         Movie movie = null;
         FileReader fR = new FileReader("/home/lt-sw-195/Área de Trabalho/db.csv");
         BufferedReader bR = new BufferedReader(fR);
-        String[] info = null;
+        String[] info;
 
         while (bR.ready()) {
             var line = bR.readLine().strip();
@@ -42,7 +42,7 @@ public class FileDataSource {
                     );
                     movie.setUuid(info[0]);
                     break;
-                } //todo: consertar a lógica caso o uuid não exista na base
+                }
             }
         }
         bR.close();

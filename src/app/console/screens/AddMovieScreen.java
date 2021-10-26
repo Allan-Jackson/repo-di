@@ -40,7 +40,7 @@ public class AddMovieScreen extends BaseScreen {
             ));
         }catch (IOException e){
             System.out.println("===============================");
-            System.out.println("Ocorreu um problema na escrita do arquivo.");
+            System.out.println("Ocorreu um problema ao salvar o filme.");
         }
         returnToMain(Constants.TEXT_TO_MAIN);
     }
