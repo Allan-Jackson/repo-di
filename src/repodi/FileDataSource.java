@@ -9,7 +9,7 @@ import java.util.UUID;
 //todo; utilizar DI no filename e deixar o tratamento da exceção para quem chamar
 public class FileDataSource {
     public void saveMovie(Movie movie) throws IOException{
-        FileWriter fileWriter = new FileWriter(PropertyUtils.getFile("MOVIE_DATABASE_FILENAME"), true);
+        FileWriter fileWriter = new FileWriter(PropertyUtils.getFile(Property.MOVIE_DATABASE_FILENAME.name()), true);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
         //cria o ID do filme
