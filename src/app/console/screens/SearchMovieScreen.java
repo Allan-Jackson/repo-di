@@ -2,6 +2,8 @@ package app.console.screens;
 
 import app.console.constants.Constants;
 import repodi.FileDataSource;
+import repodi.Property;
+import repodi.PropertyUtils;
 import repodi.beans.Movie;
 
 import java.io.IOException;
@@ -10,7 +12,7 @@ import java.util.Scanner;
 //todo: tratamento da exceção de searchInFile
 public class SearchMovieScreen extends BaseScreen{
     private final Scanner mScanner = new Scanner(System.in);
-    private final FileDataSource fileDataSrc = new FileDataSource();
+    private final FileDataSource fileDataSrc = new FileDataSource(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name()));
 
     @Override
     public void onCreate() {

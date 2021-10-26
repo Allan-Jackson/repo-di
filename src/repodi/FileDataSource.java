@@ -8,8 +8,14 @@ import java.util.List;
 import java.util.UUID;
 //todo; utilizar DI no filename e deixar o tratamento da exceção para quem chamar
 public class FileDataSource {
+    private String FILE_PATH;
+
+    public FileDataSource(String filename){
+        FILE_PATH = filename;
+    }
+
     public void saveMovie(Movie movie) throws IOException{
-        FileWriter fileWriter = new FileWriter(PropertyUtils.getFile(Property.MOVIE_DATABASE_FILENAME.name()), true);
+        FileWriter fileWriter = new FileWriter(FILE_PATH, true);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
         //cria o ID do filme
@@ -25,7 +31,7 @@ public class FileDataSource {
 
     public Movie searchMovie(String uuid) throws IOException{
         Movie movie = null;
-        FileReader fR = new FileReader("/home/lt-sw-195/Área de Trabalho/db.csv");
+        FileReader fR = new FileReader(FILE_PATH);
         BufferedReader bR = new BufferedReader(fR);
         String[] info;
 
@@ -56,9 +62,9 @@ public class FileDataSource {
      */
     public List<Movie> searchAll() throws IOException{
         List<Movie> movieList = new ArrayList<>();
-        FileReader fR = new FileReader("/home/lt-sw-195/Área de Trabalho/db.csv");
+        FileReader fR = new FileReader(FILE_PATH);
         BufferedReader bR = new BufferedReader(fR);
-        String[] info = null;
+        String[] info;
 
         while (bR.ready()) {
             var line = bR.readLine().strip();
