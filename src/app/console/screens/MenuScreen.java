@@ -3,7 +3,7 @@ package app.console.screens;
 import app.console.Menu;
 import app.console.constants.Constants;
 
-public class MenuScreen extends BaseScreen{
+public class MenuScreen extends BaseScreen {
 
     Menu mMenu = new Menu();
 

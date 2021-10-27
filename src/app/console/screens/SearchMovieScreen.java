@@ -10,16 +10,20 @@ import java.io.IOException;
 import java.util.Scanner;
 
 //todo: tratamento da exceção de searchInFile
-public class SearchMovieScreen extends BaseScreen{
-    private final Scanner mScanner = new Scanner(System.in);
-    private final FileDataSource fileDataSrc = new FileDataSource(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name()));
+public class SearchMovieScreen extends BaseScreen {
+
+    private final FileDataSource fileDataSrc;
+
+    public SearchMovieScreen(FileDataSource fileDataSrc){
+        this.fileDataSrc = fileDataSrc;
+    }
 
     @Override
     public void onCreate() {
         setMainScreen(MenuScreen.class);
 
         System.out.print("Digite o ID do filme: ");
-        var uuid = mScanner.nextLine();
+        var uuid = new Scanner(System.in).nextLine();
         try{
             var movie = fileDataSrc.searchMovie(uuid);
             if (movie != null) {

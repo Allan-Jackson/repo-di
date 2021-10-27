@@ -1,9 +1,11 @@
 package app.console.screens;
 
+import app.console.screens.initializer.ScreenInitializer;
+
 import java.util.Scanner;
 
 //todo: ver como melhorar o generics aqui
-public abstract class BaseScreen<A extends Screen> implements Screen{
+public abstract class BaseScreen<A extends IScreen> implements IScreen {
     private   Class<A> mainScreen;
 //    public <Y extends Screen> Class<Y> get;
 
@@ -13,6 +15,11 @@ public abstract class BaseScreen<A extends Screen> implements Screen{
 
     public void setMainScreen(Class<A> mainScreen) {
         this.mainScreen = mainScreen;
+    }
+
+    public <T extends IScreen> void startScreen(Class<T> screenClass) throws Exception{
+        var initializer = new ScreenInitializer();
+        startScreen(screenClass,initializer);
     }
 
     protected void returnToMain(String msg) {

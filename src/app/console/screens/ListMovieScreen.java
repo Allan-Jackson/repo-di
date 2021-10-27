@@ -6,16 +6,18 @@ import repodi.Property;
 import repodi.PropertyUtils;
 import repodi.beans.Movie;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 //todo: utilizar FileDataSource para manipular o arquivo com os dados
 public class ListMovieScreen extends BaseScreen {
-    private final Scanner mScanner = new Scanner(System.in);
-    private final FileDataSource fileDataSrc = new FileDataSource(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name()));
+//    private final Scanner mScanner = new Scanner(System.in);
+    private final FileDataSource fileDataSrc;
+
+    public ListMovieScreen(FileDataSource fileDataSrc){
+        this.fileDataSrc = fileDataSrc;
+    }
 
     @Override
     public void onCreate() {

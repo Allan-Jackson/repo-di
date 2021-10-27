@@ -6,9 +6,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-//todo; utilizar DI no filename e deixar o tratamento da exceção para quem chamar
+
 public class FileDataSource {
-    private String FILE_PATH;
+    private final String FILE_PATH;
 
     public FileDataSource(String filename){
         FILE_PATH = filename;

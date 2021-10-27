@@ -2,8 +2,6 @@ package app.console.screens;
 
 import app.console.constants.Constants;
 import repodi.FileDataSource;
-import repodi.Property;
-import repodi.PropertyUtils;
 import repodi.beans.Movie;
 
 import java.io.IOException;
@@ -11,11 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//todo: tratamento da exceção de writeFile
+//todo: usar DI na classe
 public class AddMovieScreen extends BaseScreen {
     private final Scanner mScanner = new Scanner(System.in);
-    private final FileDataSource fileDataSrc = new FileDataSource(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name()));
-                
+    private final FileDataSource fileDataSource;
+
+
+
+    public AddMovieScreen(FileDataSource fileDataSrc){
+        fileDataSource = fileDataSrc;
+    }
+
     @Override
     public void onCreate() {
         setMainScreen(MenuScreen.class);
@@ -34,7 +38,7 @@ public class AddMovieScreen extends BaseScreen {
         }
 
         try{
-            fileDataSrc.saveMovie(new Movie(
+            fileDataSource.saveMovie(new Movie(
                     data.get(0),
                     data.get(1),
                     data.get(2),
