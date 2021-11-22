@@ -7,6 +7,7 @@ public class Constants {
     public final static String ADD_MOVIE = "Adicionar filme";
     public final static String LIST_MOVIES = "Listar filmes";
     public final static String SEARCH_MOVIE = "Buscar um filme";
+    public final static String CLEAR_ALL = "Limpar filmes";
 
     //string to return to main screen
     public final static String TEXT_TO_MAIN = "Tecle \"Enter\" para voltar ao menu...";

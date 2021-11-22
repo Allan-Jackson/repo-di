@@ -1,15 +1,15 @@
 package app.console.screens;
 
 import app.console.constants.Constants;
+import org.jetbrains.annotations.NotNull;
 import repodi.FileDataSource;
-import repodi.Property;
-import repodi.PropertyUtils;
+import repodi.MovieNotFoundException;
 import repodi.beans.Movie;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-//todo: tratamento da exceção de searchInFile
+
 public class SearchMovieScreen extends BaseScreen {
 
     private final FileDataSource fileDataSrc;
@@ -26,19 +26,15 @@ public class SearchMovieScreen extends BaseScreen {
         var uuid = new Scanner(System.in).nextLine();
         try{
             var movie = fileDataSrc.searchMovie(uuid);
-            if (movie != null) {
-                displayMovieInfo(movie);
-            }else{
-                System.out.println("Filme não encontrado");
-            }
-        }catch (IOException e){ //todo: criar exceção de MovieNotFound
+            displayMovieInfo(movie);
+        }catch (MovieNotFoundException e){
             System.out.println("===============================");
-            System.out.println("Ocorreu um problema na leitura do arquivo.");
+            System.out.println("Filme não encontrado");
         }
         returnToMain(Constants.TEXT_TO_MAIN);
     }
 
-    private void displayMovieInfo(Movie movie){
+    private void displayMovieInfo(@NotNull Movie movie){
         System.out.println("\n=====Informações do Filme=====");
         System.out.println("UUID: " + movie.getUuid());
         System.out.println("Nome: " + movie.getMovieName());

@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//todo: usar DI na classe
+
 public class AddMovieScreen extends BaseScreen {
     private final Scanner mScanner = new Scanner(System.in);
     private final FileDataSource fileDataSource;
-
 
 
     public AddMovieScreen(FileDataSource fileDataSrc){

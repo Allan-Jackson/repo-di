@@ -6,12 +6,13 @@ import repodi.FileDataSource;
 import repodi.Property;
 import repodi.PropertyUtils;
 
+import javax.sound.midi.ControllerEventListener;
+
 public class ScreenInitializer implements IScreenInitializer{
     private final String MENU_SCREEN = "MenuScreen";
     private final String ADD_MOVIE_SCREEN = "AddMovieScreen";
     private final String LIST_MOVIE_SCREEN = "ListMovieScreen";
     private final String SEARCH_MOVIE_SCREEN = "SearchMovieScreen";
-
 
     @Override
     public <T extends IScreen> T getInstance(@NotNull Class<T> clazz) throws Exception {

@@ -11,6 +11,8 @@ import java.util.Properties;
     e essa classe NÃO GERENCIA nenhum estado da aplicação;*/
 public class PropertyUtils {
 
+    private static final String PROP_FILE_PATH = "/home/lt-sw-195/Área de Trabalho/repodi.properties";
+
     /**
      * Instância Singleton.
      */
@@ -24,7 +26,7 @@ public class PropertyUtils {
     private PropertyUtils(){
         try{
             props = new Properties();
-            FileReader file = new FileReader("/home/lt-sw-195/Área de Trabalho/repodi.properties");
+            FileReader file = new FileReader(PROP_FILE_PATH);
             props.load(file);
         }catch (IOException e){
             throw new RuntimeException("Erro ao obter as propriedades do sistema.");
@@ -36,7 +38,7 @@ public class PropertyUtils {
      * @return instância do Singleton.
      */
     private static PropertyUtils getInstance(){
-        if(instance ==null){
+        if(instance == null){
             instance = new PropertyUtils();
         }
         return instance;

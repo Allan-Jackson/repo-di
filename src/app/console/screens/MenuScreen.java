@@ -1,7 +1,9 @@
 package app.console.screens;
 
+import app.console.ChoiceHandler;
 import app.console.Menu;
 import app.console.constants.Constants;
+
 
 public class MenuScreen extends BaseScreen {
 
@@ -19,11 +21,12 @@ public class MenuScreen extends BaseScreen {
         mMenu.addItemToMenu(Constants.ADD_MOVIE);
         mMenu.addItemToMenu(Constants.LIST_MOVIES);
         mMenu.addItemToMenu(Constants.SEARCH_MOVIE);
+        mMenu.addItemToMenu(Constants.CLEAR_ALL);
     }
 
     void setHandlers(){
+
         mMenu.setChoiceHandler(opText->{
-            //todo: alterar switch para usar startScreen nos cases
             try{
                 switch (opText) {
                     case Constants.ADD_MOVIE:
@@ -34,6 +37,9 @@ public class MenuScreen extends BaseScreen {
                         break;
                     case Constants.SEARCH_MOVIE:
                         startScreen(SearchMovieScreen.class);
+                        break;
+                    case Constants.CLEAR_ALL:
+                        startScreen(ClearAllScreen.class);
                         break;
                     default:
                         System.exit(0);

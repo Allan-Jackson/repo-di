@@ -4,6 +4,7 @@ import app.console.screens.initializer.ScreenInitializer;
 
 import java.util.Scanner;
 
+
 //todo: ver como melhorar o generics aqui
 public abstract class BaseScreen<A extends IScreen> implements IScreen {
     private   Class<A> mainScreen;
