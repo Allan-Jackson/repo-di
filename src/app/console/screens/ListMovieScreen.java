@@ -3,6 +3,7 @@ package app.console.screens;
 import app.console.constants.Constants;
 import repodi.FileDataSource;
 import repodi.MovieNotFoundException;
+import repodi.MySqlDataSource;
 import repodi.beans.Movie;
 
 import java.util.List;
@@ -10,10 +11,10 @@ import java.util.List;
 
 public class ListMovieScreen extends BaseScreen {
 
-    private final FileDataSource fileDataSrc;
+    private final MySqlDataSource dataSource;
 
-    public ListMovieScreen(FileDataSource fileDataSrc){
-        this.fileDataSrc = fileDataSrc;
+    public ListMovieScreen(MySqlDataSource dataSource){
+        this.dataSource = dataSource;
     }
 
     @Override
@@ -21,7 +22,7 @@ public class ListMovieScreen extends BaseScreen {
         setMainScreen(MenuScreen.class);
 
         try {
-            List<Movie> movieList = fileDataSrc.searchAll();
+            List<Movie> movieList = dataSource.searchAll();
             if(!movieList.isEmpty()){
                 System.out.println("ID  |  Nome");
                 for(Movie movie:movieList){

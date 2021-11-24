@@ -4,16 +4,17 @@ import app.console.constants.Constants;
 import app.console.screens.initializer.IScreenInitializer;
 import org.jetbrains.annotations.NotNull;
 import repodi.FileDataSource;
+import repodi.MySqlDataSource;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 public class ClearAllScreen extends BaseScreen{
 
-    private final FileDataSource fileDataSrc;
+    private final MySqlDataSource dataSource;
 
-    public ClearAllScreen(FileDataSource fileDataSrc){
-        this.fileDataSrc = fileDataSrc;
+    public ClearAllScreen(MySqlDataSource dataSource){
+        this.dataSource = dataSource;
     }
 
     @Override
@@ -28,9 +29,9 @@ public class ClearAllScreen extends BaseScreen{
         var op = scanner.next();
         if(op.toUpperCase().equals("Y")){
             try{
-                fileDataSrc.clearAll();
+                dataSource.clearAll();
                 System.out.println("Operação realizada com sucesso!");
-            }catch (IOException e){
+            }catch (Exception e){
                 System.out.println("Houve um problema na realização da operação.");
             }
         }else{

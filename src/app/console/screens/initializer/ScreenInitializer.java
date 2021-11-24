@@ -3,6 +3,7 @@ package app.console.screens.initializer;
 import app.console.screens.IScreen;
 import org.jetbrains.annotations.NotNull;
 import repodi.FileDataSource;
+import repodi.MySqlDataSource;
 import repodi.Property;
 import repodi.PropertyUtils;
 
@@ -13,6 +14,7 @@ public class ScreenInitializer implements IScreenInitializer{
     private final String ADD_MOVIE_SCREEN = "AddMovieScreen";
     private final String LIST_MOVIE_SCREEN = "ListMovieScreen";
     private final String SEARCH_MOVIE_SCREEN = "SearchMovieScreen";
+    private final String CLEAR_ALL_SCREEN = "ClearAllScreen";
 
     @Override
     public <T extends IScreen> T getInstance(@NotNull Class<T> clazz) throws Exception {
@@ -22,6 +24,22 @@ public class ScreenInitializer implements IScreenInitializer{
             case MENU_SCREEN:
               retorno = clazz.getConstructor(null).newInstance();
               break;
+            case LIST_MOVIE_SCREEN:
+                retorno = clazz.getConstructor(MySqlDataSource.class)
+                        .newInstance(new MySqlDataSource());
+                break;
+            case ADD_MOVIE_SCREEN:
+                retorno = clazz.getConstructor(MySqlDataSource.class)
+                        .newInstance(new MySqlDataSource());
+                break;
+            case SEARCH_MOVIE_SCREEN:
+                retorno = clazz.getConstructor(MySqlDataSource.class)
+                        .newInstance(new MySqlDataSource());
+                break;
+            case CLEAR_ALL_SCREEN:
+                retorno = clazz.getConstructor(MySqlDataSource.class)
+                        .newInstance(new MySqlDataSource());
+                break;
             default:
                 retorno = clazz.getConstructor(FileDataSource.class)
                         .newInstance(new FileDataSource(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name())));

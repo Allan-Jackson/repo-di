@@ -4,6 +4,7 @@ import app.console.constants.Constants;
 import org.jetbrains.annotations.NotNull;
 import repodi.FileDataSource;
 import repodi.MovieNotFoundException;
+import repodi.MySqlDataSource;
 import repodi.beans.Movie;
 
 import java.io.IOException;
@@ -12,10 +13,10 @@ import java.util.Scanner;
 
 public class SearchMovieScreen extends BaseScreen {
 
-    private final FileDataSource fileDataSrc;
+    private final MySqlDataSource dataSource;
 
-    public SearchMovieScreen(FileDataSource fileDataSrc){
-        this.fileDataSrc = fileDataSrc;
+    public SearchMovieScreen(MySqlDataSource dataSource){
+        this.dataSource = dataSource;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class SearchMovieScreen extends BaseScreen {
         System.out.print("Digite o ID do filme: ");
         var uuid = new Scanner(System.in).nextLine();
         try{
-            var movie = fileDataSrc.searchMovie(uuid);
+            var movie = dataSource.searchMovie(uuid);
             displayMovieInfo(movie);
         }catch (MovieNotFoundException e){
             System.out.println("===============================");

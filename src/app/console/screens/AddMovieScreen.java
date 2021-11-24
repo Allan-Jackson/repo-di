@@ -2,6 +2,7 @@ package app.console.screens;
 
 import app.console.constants.Constants;
 import repodi.FileDataSource;
+import repodi.MySqlDataSource;
 import repodi.beans.Movie;
 
 import java.io.IOException;
@@ -12,11 +13,11 @@ import java.util.Scanner;
 
 public class AddMovieScreen extends BaseScreen {
     private final Scanner mScanner = new Scanner(System.in);
-    private final FileDataSource fileDataSource;
+    private final MySqlDataSource dataSource;
 
 
-    public AddMovieScreen(FileDataSource fileDataSrc){
-        fileDataSource = fileDataSrc;
+    public AddMovieScreen(MySqlDataSource dataSource){
+        this.dataSource = dataSource;
     }
 
     @Override
@@ -37,13 +38,13 @@ public class AddMovieScreen extends BaseScreen {
         }
 
         try{
-            fileDataSource.saveMovie(new Movie(
+            dataSource.saveMovie(new Movie(
                     data.get(0),
                     data.get(1),
                     data.get(2),
                     data.get(3)
             ));
-        }catch (IOException e){
+        }catch (Exception e){
             System.out.println("===============================");
             System.out.println("Ocorreu um problema ao salvar o filme.");
         }
