@@ -9,6 +9,9 @@ import repodi.MySqlDataSource;
 import repodi.beans.Movie;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -37,11 +40,12 @@ public class SearchMovieScreen extends BaseScreen {
     }
 
     private void displayMovieInfo(@NotNull Movie movie){
+        String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(movie.getMovieDate());
         System.out.println("\n=====Informações do Filme=====");
         System.out.println("UUID: " + movie.getUuid());
         System.out.println("Nome: " + movie.getMovieName());
         System.out.println("Gênero: " + movie.getMovieGenre());
-        System.out.println("Lançamento: " + movie.getMovieDate());
+        System.out.println("Lançamento: " + formattedDate);
         System.out.println("Diretor: " + movie.getMovieDirector());
     }
 }

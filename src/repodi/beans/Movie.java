@@ -1,16 +1,17 @@
 package repodi.beans;
 
 
+import java.util.Date;
 import java.util.Objects;
 
 public class Movie {
     private String uuid;
     private String movieName;
     private String movieGenre;
-    private String movieDate;
+    private Date movieDate;
     private String movieDirector;
 
-    public Movie(String movieName, String movieGenre, String movieDate, String movieDirector) {
+    public Movie(String movieName, String movieGenre, Date movieDate, String movieDirector) {
         this.movieName = movieName;
         this.movieGenre = movieGenre;
         this.movieDate = movieDate;
@@ -33,11 +34,11 @@ public class Movie {
         this.movieGenre = movieGenre;
     }
 
-    public String getMovieDate() {
+    public Date getMovieDate() {
         return movieDate;
     }
 
-    public void setMovieDate(String movieDate) {
+    public void setMovieDate(Date movieDate) {
         this.movieDate = movieDate;
     }
 

@@ -4,8 +4,6 @@ import app.console.screens.IScreen;
 import org.jetbrains.annotations.NotNull;
 import repodi.*;
 
-import javax.sound.midi.ControllerEventListener;
-
 public class ScreenInitializer implements IScreenInitializer{
     private final String MENU_SCREEN = "MenuScreen";
     private final String ADD_MOVIE_SCREEN = "AddMovieScreen";

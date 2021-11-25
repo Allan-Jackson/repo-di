@@ -3,6 +3,8 @@ package repodi;
 import repodi.beans.Movie;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,7 +24,8 @@ public class FileDataSource implements MovieDAO{
         bufferedWriter.write(UUID.randomUUID() + ";");
         bufferedWriter.write(movie.getMovieName() + ";");
         bufferedWriter.write(movie.getMovieGenre() + ";");
-        bufferedWriter.write(movie.getMovieDate() + ";");
+        String formattedDate = new SimpleDateFormat("yyyy/MM/dd").format(movie.getMovieDate());
+        bufferedWriter.write(formattedDate + ";");
         bufferedWriter.write(movie.getMovieDirector() + "\n");
 
         bufferedWriter.close();
@@ -42,7 +45,7 @@ public class FileDataSource implements MovieDAO{
                         movie = new Movie(
                                 info[1],
                                 info[2],
-                                info[3],
+                                (new SimpleDateFormat("yyyy/MM/dd")).parse(info[3]), //data
                                 info[4]
                         );
                         movie.setUuid(info[0]);
@@ -56,8 +59,8 @@ public class FileDataSource implements MovieDAO{
             }else{
                 throw new MovieNotFoundException("Não existe um filme com o UUID informado.");
             }
-        } catch (IOException io) {
-            throw new MovieNotFoundException("Houve um problema na leitura do arquivo de filmes.", io);
+        } catch (Exception e) {
+            throw new MovieNotFoundException("Houve um problema na leitura do arquivo de filmes.", e);
         }
     }
 
@@ -71,14 +74,14 @@ public class FileDataSource implements MovieDAO{
                 var line = bR.readLine().strip();
                 if (!line.isEmpty() && !line.isBlank()) {
                     info = line.split(";");
-                    var movie = new Movie(info[1], info[2], info[3] , info[4]);
+                    var movie = new Movie(info[1], info[2], (new SimpleDateFormat("dd/MM/yyyy")).parse(info[3]), info[4]);
                     movie.setUuid(info[0]);
                     movieList.add(movie);
                 }
             }
             return movieList;
-        }catch(IOException io){
-            throw new MovieNotFoundException("Houve um problema na leitura do arquivo de filmes.", io);
+        }catch(Exception e){
+            throw new MovieNotFoundException("Houve um problema na leitura do arquivo de filmes.", e);
         }
     }
 

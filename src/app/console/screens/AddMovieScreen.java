@@ -7,6 +7,7 @@ import repodi.MySqlDataSource;
 import repodi.beans.Movie;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -40,10 +41,10 @@ public class AddMovieScreen extends BaseScreen {
 
         try{
             dataSource.saveMovie(new Movie(
-                    data.get(0),
-                    data.get(1),
-                    data.get(2),
-                    data.get(3)
+                    data.get(0), //nome
+                    data.get(1), //gênero
+                    (new SimpleDateFormat("dd/MM/yyyy")).parse(data.get(2)), //data
+                    data.get(3) //diretor
             ));
             System.out.println("----------------");
             System.out.println("Filme salvo com sucesso!");
