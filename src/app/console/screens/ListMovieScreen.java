@@ -2,6 +2,7 @@ package app.console.screens;
 
 import app.console.constants.Constants;
 import repodi.FileDataSource;
+import repodi.MovieDAO;
 import repodi.MovieNotFoundException;
 import repodi.MySqlDataSource;
 import repodi.beans.Movie;
@@ -11,9 +12,9 @@ import java.util.List;
 
 public class ListMovieScreen extends BaseScreen {
 
-    private final MySqlDataSource dataSource;
+    private final MovieDAO dataSource;
 
-    public ListMovieScreen(MySqlDataSource dataSource){
+    public ListMovieScreen(MovieDAO dataSource){
         this.dataSource = dataSource;
     }
 

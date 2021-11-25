@@ -2,10 +2,7 @@ package app.console.screens.initializer;
 
 import app.console.screens.IScreen;
 import org.jetbrains.annotations.NotNull;
-import repodi.FileDataSource;
-import repodi.MySqlDataSource;
-import repodi.Property;
-import repodi.PropertyUtils;
+import repodi.*;
 
 import javax.sound.midi.ControllerEventListener;
 
@@ -25,23 +22,23 @@ public class ScreenInitializer implements IScreenInitializer{
               retorno = clazz.getConstructor(null).newInstance();
               break;
             case LIST_MOVIE_SCREEN:
-                retorno = clazz.getConstructor(MySqlDataSource.class)
+                retorno = clazz.getConstructor(MovieDAO.class)
                         .newInstance(new MySqlDataSource());
                 break;
             case ADD_MOVIE_SCREEN:
-                retorno = clazz.getConstructor(MySqlDataSource.class)
+                retorno = clazz.getConstructor(MovieDAO.class)
                         .newInstance(new MySqlDataSource());
                 break;
             case SEARCH_MOVIE_SCREEN:
-                retorno = clazz.getConstructor(MySqlDataSource.class)
+                retorno = clazz.getConstructor(MovieDAO.class)
                         .newInstance(new MySqlDataSource());
                 break;
             case CLEAR_ALL_SCREEN:
-                retorno = clazz.getConstructor(MySqlDataSource.class)
+                retorno = clazz.getConstructor(MovieDAO.class)
                         .newInstance(new MySqlDataSource());
                 break;
             default:
-                retorno = clazz.getConstructor(FileDataSource.class)
+                retorno = clazz.getConstructor(MovieDAO.class)
                         .newInstance(new FileDataSource(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name())));
         }
 

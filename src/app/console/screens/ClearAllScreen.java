@@ -4,6 +4,7 @@ import app.console.constants.Constants;
 import app.console.screens.initializer.IScreenInitializer;
 import org.jetbrains.annotations.NotNull;
 import repodi.FileDataSource;
+import repodi.MovieDAO;
 import repodi.MySqlDataSource;
 
 import java.io.IOException;
@@ -11,9 +12,9 @@ import java.util.Scanner;
 
 public class ClearAllScreen extends BaseScreen{
 
-    private final MySqlDataSource dataSource;
+    private final MovieDAO dataSource;
 
-    public ClearAllScreen(MySqlDataSource dataSource){
+    public ClearAllScreen(MovieDAO dataSource){
         this.dataSource = dataSource;
     }
 

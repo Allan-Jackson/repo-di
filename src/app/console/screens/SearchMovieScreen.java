@@ -3,6 +3,7 @@ package app.console.screens;
 import app.console.constants.Constants;
 import org.jetbrains.annotations.NotNull;
 import repodi.FileDataSource;
+import repodi.MovieDAO;
 import repodi.MovieNotFoundException;
 import repodi.MySqlDataSource;
 import repodi.beans.Movie;
@@ -13,9 +14,9 @@ import java.util.Scanner;
 
 public class SearchMovieScreen extends BaseScreen {
 
-    private final MySqlDataSource dataSource;
+    private final MovieDAO dataSource;
 
-    public SearchMovieScreen(MySqlDataSource dataSource){
+    public SearchMovieScreen(MovieDAO dataSource){
         this.dataSource = dataSource;
     }
 

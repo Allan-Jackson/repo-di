@@ -2,6 +2,7 @@ package app.console.screens;
 
 import app.console.constants.Constants;
 import repodi.FileDataSource;
+import repodi.MovieDAO;
 import repodi.MySqlDataSource;
 import repodi.beans.Movie;
 
@@ -13,10 +14,10 @@ import java.util.Scanner;
 
 public class AddMovieScreen extends BaseScreen {
     private final Scanner mScanner = new Scanner(System.in);
-    private final MySqlDataSource dataSource;
+    private final MovieDAO dataSource;
 
 
-    public AddMovieScreen(MySqlDataSource dataSource){
+    public AddMovieScreen(MovieDAO dataSource){
         this.dataSource = dataSource;
     }
 
@@ -44,6 +45,8 @@ public class AddMovieScreen extends BaseScreen {
                     data.get(2),
                     data.get(3)
             ));
+            System.out.println("----------------");
+            System.out.println("Filme salvo com sucesso!");
         }catch (Exception e){
             System.out.println("===============================");
             System.out.println("Ocorreu um problema ao salvar o filme.");

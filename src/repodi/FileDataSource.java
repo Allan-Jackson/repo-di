@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class FileDataSource{
+public class FileDataSource implements MovieDAO{
     private final String FILE_PATH;
 
     public FileDataSource(String filename){
@@ -29,14 +29,6 @@ public class FileDataSource{
         fileWriter.close();
     }
 
-    /**
-     * Retorna o filme que possui o uuid informado. Caso ele não exista ou ocorrer algum erro, retorna
-     * a exceção MovieNotFoundException.
-     * @param uuid identificador do filme que se deseja buscar.
-     * @return filme que possui o uuid informado.
-     * @throws MovieNotFoundException se não existir um filme com o uuid informado
-     * ou se um erro para encontrar o arquivo de filmes ou lê-lo ocorrer.
-     */
     public Movie searchMovie(String uuid) throws MovieNotFoundException{
         Movie movie = null;
         String[] info;
@@ -69,10 +61,6 @@ public class FileDataSource{
         }
     }
 
-    /**
-     * deve passar por cada linha do arquivo, gerar um Movie para cada e adicionar na lista, no final deve retorná-la
-     * @return lista contendo todos os filmes armazenados.
-     */
     public List<Movie> searchAll() throws MovieNotFoundException{
         List<Movie> movieList = new ArrayList<>();
         String[] info;
@@ -94,10 +82,6 @@ public class FileDataSource{
         }
     }
 
-    /**
-     * Limpa a lista de filmes do repositório, excluindo todos os filmes existentes.
-     * @throws IOException caso ocorra algum problema de leitura/escrita ou para abrir o arquivo contendo os filmes.
-     */
     public void clearAll() throws IOException {
         FileWriter fileWriter = new FileWriter(FILE_PATH, false);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);

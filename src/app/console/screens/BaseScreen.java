@@ -7,8 +7,10 @@ import java.util.Scanner;
 
 //todo: ver como melhorar o generics aqui
 public abstract class BaseScreen<A extends IScreen> implements IScreen {
-    private   Class<A> mainScreen;
-//    public <Y extends Screen> Class<Y> get;
+    /**
+     * Tela principal para qual o método {@link BaseScreen#returnToMain(String)} deve redirecionar.
+     */
+    private Class<A> mainScreen;
 
     public Class<A> getMainScreen() {
         return mainScreen;
@@ -23,6 +25,10 @@ public abstract class BaseScreen<A extends IScreen> implements IScreen {
         startScreen(screenClass,initializer);
     }
 
+    /**
+     * Redireciona para a Screen especificada no atributo {@link BaseScreen#mainScreen}, após a exibição da mensagem informada.
+     * @param msg a mensagem para ser exibida antes do redirecionamento.
+     */
     protected void returnToMain(String msg) {
         try{
             var scanner = new Scanner(System.in);
