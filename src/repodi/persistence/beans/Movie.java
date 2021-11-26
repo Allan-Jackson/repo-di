@@ -1,4 +1,4 @@
-package repodi.beans;
+package repodi.persistence.beans;
 
 
 import java.util.Date;

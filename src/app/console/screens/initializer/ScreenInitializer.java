@@ -3,6 +3,9 @@ package app.console.screens.initializer;
 import app.console.screens.IScreen;
 import org.jetbrains.annotations.NotNull;
 import repodi.*;
+import repodi.persistence.daos.FileMovieDAO;
+import repodi.persistence.daos.MovieDAO;
+import repodi.persistence.daos.MySqlMovieDAO;
 
 public class ScreenInitializer implements IScreenInitializer{
     private final String MENU_SCREEN = "MenuScreen";
@@ -21,23 +24,23 @@ public class ScreenInitializer implements IScreenInitializer{
               break;
             case LIST_MOVIE_SCREEN:
                 retorno = clazz.getConstructor(MovieDAO.class)
-                        .newInstance(new MySqlDataSource());
+                        .newInstance(new MySqlMovieDAO());
                 break;
             case ADD_MOVIE_SCREEN:
                 retorno = clazz.getConstructor(MovieDAO.class)
-                        .newInstance(new MySqlDataSource());
+                        .newInstance(new MySqlMovieDAO());
                 break;
             case SEARCH_MOVIE_SCREEN:
                 retorno = clazz.getConstructor(MovieDAO.class)
-                        .newInstance(new MySqlDataSource());
+                        .newInstance(new MySqlMovieDAO());
                 break;
             case CLEAR_ALL_SCREEN:
                 retorno = clazz.getConstructor(MovieDAO.class)
-                        .newInstance(new MySqlDataSource());
+                        .newInstance(new MySqlMovieDAO());
                 break;
             default:
                 retorno = clazz.getConstructor(MovieDAO.class)
-                        .newInstance(new FileDataSource(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name())));
+                        .newInstance(new FileMovieDAO(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name())));
         }
 
         return retorno;

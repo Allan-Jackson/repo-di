@@ -1,18 +1,18 @@
-package repodi;
+package repodi.persistence.daos;
 
-import repodi.beans.Movie;
+import repodi.persistence.exceptions.MovieNotFoundException;
+import repodi.persistence.beans.Movie;
 
 import java.io.*;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class FileDataSource implements MovieDAO{
+public class FileMovieDAO implements MovieDAO{
     private final String FILE_PATH;
 
-    public FileDataSource(String filename){
+    public FileMovieDAO(String filename){
         FILE_PATH = filename;
     }
 
@@ -32,7 +32,7 @@ public class FileDataSource implements MovieDAO{
         fileWriter.close();
     }
 
-    public Movie searchMovie(String uuid) throws MovieNotFoundException{
+    public Movie searchMovie(String uuid) throws MovieNotFoundException {
         Movie movie = null;
         String[] info;
 

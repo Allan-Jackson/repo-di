@@ -1,11 +1,9 @@
 package app.console.screens;
 
 import app.console.constants.Constants;
-import repodi.FileDataSource;
-import repodi.MovieDAO;
-import repodi.MovieNotFoundException;
-import repodi.MySqlDataSource;
-import repodi.beans.Movie;
+import repodi.persistence.daos.MovieDAO;
+import repodi.persistence.exceptions.MovieNotFoundException;
+import repodi.persistence.beans.Movie;
 
 import java.util.List;
 

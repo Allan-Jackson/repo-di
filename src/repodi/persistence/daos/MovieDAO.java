@@ -1,17 +1,16 @@
-package repodi;
+package repodi.persistence.daos;
 
 import org.jetbrains.annotations.NotNull;
-import repodi.beans.Movie;
+import repodi.persistence.exceptions.MovieNotFoundException;
+import repodi.persistence.beans.Movie;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public interface MovieDAO {
 
     /**
      * Adiciona um filme na base de dados.
-     * @param movie
+     * @param movie filme para ser adicionado.
      * @throws Exception caso ocorra algum problema durante a operação.
      */
     void saveMovie(@NotNull Movie movie) throws Exception;

@@ -1,4 +1,4 @@
-package repodi;
+package repodi.persistence.exceptions;
 
 
 public class MovieNotFoundException extends Exception{

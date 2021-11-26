@@ -2,16 +2,11 @@ package app.console.screens;
 
 import app.console.constants.Constants;
 import org.jetbrains.annotations.NotNull;
-import repodi.FileDataSource;
-import repodi.MovieDAO;
-import repodi.MovieNotFoundException;
-import repodi.MySqlDataSource;
-import repodi.beans.Movie;
+import repodi.persistence.daos.MovieDAO;
+import repodi.persistence.exceptions.MovieNotFoundException;
+import repodi.persistence.beans.Movie;
 
-import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Scanner;
 
 

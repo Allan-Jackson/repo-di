@@ -1,10 +1,13 @@
-package repodi;
+package repodi.persistence;
+
+import repodi.Property;
+import repodi.PropertyUtils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConnection {
+public class ConnectionFactory {
     private static Connection connection;
 
     private static final String URL = PropertyUtils.getString(Property.DB_URL_REPO_DI.name());

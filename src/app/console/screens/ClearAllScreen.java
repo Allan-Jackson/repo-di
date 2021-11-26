@@ -1,13 +1,8 @@
 package app.console.screens;
 
 import app.console.constants.Constants;
-import app.console.screens.initializer.IScreenInitializer;
-import org.jetbrains.annotations.NotNull;
-import repodi.FileDataSource;
-import repodi.MovieDAO;
-import repodi.MySqlDataSource;
+import repodi.persistence.daos.MovieDAO;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class ClearAllScreen extends BaseScreen{

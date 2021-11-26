@@ -1,15 +1,16 @@
-package repodi;
+package repodi.persistence.daos;
 
 import org.jetbrains.annotations.NotNull;
-import repodi.beans.Movie;
+import repodi.persistence.ConnectionFactory;
+import repodi.persistence.exceptions.MovieNotFoundException;
+import repodi.persistence.beans.Movie;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-public class MySqlDataSource implements MovieDAO{
+public class MySqlMovieDAO implements MovieDAO{
     private final String RETRIEVE_MOVIES = "SELECT * FROM TB_MOVIE";
     private final String ADD_MOVIE = "INSERT INTO TB_MOVIE(id_movie,name,genre,release_date,director) VALUES(?, ?, ?, ?, ?);";
     private final String CLEAR_MOVIES = "TRUNCATE TABLE TB_MOVIE";
@@ -19,7 +20,7 @@ public class MySqlDataSource implements MovieDAO{
     public List<Movie> searchAll() throws MovieNotFoundException {
         List<Movie> movieList = new ArrayList<>();
         //try with resources automatically will close stm and result
-        try (Connection connection = DBConnection.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
              Statement stm = connection.createStatement();
              ResultSet result = stm.executeQuery(RETRIEVE_MOVIES);) {
             while (result.next()) {
@@ -38,7 +39,7 @@ public class MySqlDataSource implements MovieDAO{
         }
     }
     public void saveMovie(@NotNull Movie movie) throws Exception {
-        try(Connection connection = DBConnection.getConnection();
+        try(Connection connection = ConnectionFactory.getConnection();
             PreparedStatement stm = connection.prepareStatement(ADD_MOVIE);){
             stm.setString(1, UUID.randomUUID().toString());
             stm.setString(2, movie.getMovieName());
@@ -51,8 +52,8 @@ public class MySqlDataSource implements MovieDAO{
         }
     }
     public Movie searchMovie(@NotNull String uuid) throws MovieNotFoundException{
-        try (Connection connection = DBConnection.getConnection();
-            PreparedStatement stm = connection.prepareStatement(GET_MOVIE_BY_ID);) {
+        try (Connection connection = ConnectionFactory.getConnection();
+             PreparedStatement stm = connection.prepareStatement(GET_MOVIE_BY_ID);) {
             stm.setString(1,uuid);
             ResultSet result = stm.executeQuery();
             result.next();
@@ -69,7 +70,7 @@ public class MySqlDataSource implements MovieDAO{
         }
     }
     public void clearAll() throws Exception {
-        try(Connection connection = DBConnection.getConnection();
+        try(Connection connection = ConnectionFactory.getConnection();
             var stm = connection.createStatement();){
             stm.executeUpdate(CLEAR_MOVIES);
         }catch(SQLException e){ //lançar exceção diferente de SQLException desacopla a aplicação da API de JDBC
