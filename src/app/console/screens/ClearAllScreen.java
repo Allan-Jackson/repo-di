@@ -1,16 +1,16 @@
 package app.console.screens;
 
 import app.console.constants.Constants;
-import repodi.persistence.daos.MovieDAO;
+import repodi.persistence.repositories.MovieRepository;
 
 import java.util.Scanner;
 
 public class ClearAllScreen extends BaseScreen{
 
-    private final MovieDAO dataSource;
+    private final MovieRepository movieRepository;
 
-    public ClearAllScreen(MovieDAO dataSource){
-        this.dataSource = dataSource;
+    public ClearAllScreen(MovieRepository movieRepository){
+        this.movieRepository = movieRepository;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class ClearAllScreen extends BaseScreen{
         var op = scanner.next();
         if(op.toUpperCase().equals("Y")){
             try{
-                dataSource.clearAll();
+                movieRepository.clearAll();
                 System.out.println("Operação realizada com sucesso!");
             }catch (Exception e){
                 System.out.println("Houve um problema na realização da operação.");

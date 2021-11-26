@@ -1,7 +1,7 @@
 package app.console.screens;
 
 import app.console.constants.Constants;
-import repodi.persistence.daos.MovieDAO;
+import repodi.persistence.repositories.MovieRepository;
 import repodi.persistence.exceptions.MovieNotFoundException;
 import repodi.persistence.beans.Movie;
 
@@ -10,10 +10,10 @@ import java.util.List;
 
 public class ListMovieScreen extends BaseScreen {
 
-    private final MovieDAO dataSource;
+    private final MovieRepository movieRepository;
 
-    public ListMovieScreen(MovieDAO dataSource){
-        this.dataSource = dataSource;
+    public ListMovieScreen(MovieRepository movieRepository){
+        this.movieRepository = movieRepository;
     }
 
     @Override
@@ -21,7 +21,7 @@ public class ListMovieScreen extends BaseScreen {
         setMainScreen(MenuScreen.class);
 
         try {
-            List<Movie> movieList = dataSource.searchAll();
+            List<Movie> movieList = movieRepository.findAll();
             if(!movieList.isEmpty()){
                 System.out.println("ID  |  Nome");
                 for(Movie movie:movieList){

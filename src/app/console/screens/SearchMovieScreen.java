@@ -2,7 +2,8 @@ package app.console.screens;
 
 import app.console.constants.Constants;
 import org.jetbrains.annotations.NotNull;
-import repodi.persistence.daos.MovieDAO;
+import repodi.persistence.repositories.MovieRepository;
+import repodi.persistence.repositories.daos.MovieDAO;
 import repodi.persistence.exceptions.MovieNotFoundException;
 import repodi.persistence.beans.Movie;
 
@@ -12,10 +13,10 @@ import java.util.Scanner;
 
 public class SearchMovieScreen extends BaseScreen {
 
-    private final MovieDAO dataSource;
+    private final MovieRepository movieRepository;
 
-    public SearchMovieScreen(MovieDAO dataSource){
-        this.dataSource = dataSource;
+    public SearchMovieScreen(MovieRepository movieRepository){
+        this.movieRepository = movieRepository;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class SearchMovieScreen extends BaseScreen {
         System.out.print("Digite o ID do filme: ");
         var uuid = new Scanner(System.in).nextLine();
         try{
-            var movie = dataSource.searchMovie(uuid);
+            var movie = movieRepository.find(uuid);
             displayMovieInfo(movie);
         }catch (MovieNotFoundException e){
             System.out.println("===============================");

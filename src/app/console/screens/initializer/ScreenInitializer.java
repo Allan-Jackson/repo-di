@@ -3,9 +3,10 @@ package app.console.screens.initializer;
 import app.console.screens.IScreen;
 import org.jetbrains.annotations.NotNull;
 import repodi.*;
-import repodi.persistence.daos.FileMovieDAO;
-import repodi.persistence.daos.MovieDAO;
-import repodi.persistence.daos.MySqlMovieDAO;
+import repodi.persistence.repositories.MovieRepository;
+import repodi.persistence.repositories.daos.FileMovieDAO;
+import repodi.persistence.repositories.daos.MovieDAO;
+import repodi.persistence.repositories.daos.MySqlMovieDAO;
 
 public class ScreenInitializer implements IScreenInitializer{
     private final String MENU_SCREEN = "MenuScreen";
@@ -23,20 +24,20 @@ public class ScreenInitializer implements IScreenInitializer{
               retorno = clazz.getConstructor(null).newInstance();
               break;
             case LIST_MOVIE_SCREEN:
-                retorno = clazz.getConstructor(MovieDAO.class)
-                        .newInstance(new MySqlMovieDAO());
+                retorno = clazz.getConstructor(MovieRepository.class)
+                        .newInstance(new MovieRepository(new MySqlMovieDAO()));
                 break;
             case ADD_MOVIE_SCREEN:
-                retorno = clazz.getConstructor(MovieDAO.class)
-                        .newInstance(new MySqlMovieDAO());
+                retorno = clazz.getConstructor(MovieRepository.class)
+                        .newInstance(new MovieRepository(new MySqlMovieDAO()));
                 break;
             case SEARCH_MOVIE_SCREEN:
-                retorno = clazz.getConstructor(MovieDAO.class)
-                        .newInstance(new MySqlMovieDAO());
+                retorno = clazz.getConstructor(MovieRepository.class)
+                        .newInstance(new MovieRepository(new MySqlMovieDAO()));
                 break;
             case CLEAR_ALL_SCREEN:
-                retorno = clazz.getConstructor(MovieDAO.class)
-                        .newInstance(new MySqlMovieDAO());
+                retorno = clazz.getConstructor(MovieRepository.class)
+                        .newInstance(new MovieRepository(new MySqlMovieDAO()));
                 break;
             default:
                 retorno = clazz.getConstructor(MovieDAO.class)

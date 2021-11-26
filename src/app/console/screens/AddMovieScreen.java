@@ -1,7 +1,7 @@
 package app.console.screens;
 
 import app.console.constants.Constants;
-import repodi.persistence.daos.MovieDAO;
+import repodi.persistence.repositories.MovieRepository;
 import repodi.persistence.beans.Movie;
 
 import java.text.SimpleDateFormat;
@@ -12,11 +12,11 @@ import java.util.Scanner;
 
 public class AddMovieScreen extends BaseScreen {
     private final Scanner mScanner = new Scanner(System.in);
-    private final MovieDAO dataSource;
+    private final MovieRepository movieRepository;
 
 
-    public AddMovieScreen(MovieDAO dataSource){
-        this.dataSource = dataSource;
+    public AddMovieScreen(MovieRepository repository){
+        this.movieRepository = repository;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AddMovieScreen extends BaseScreen {
         }
 
         try{
-            dataSource.saveMovie(new Movie(
+            movieRepository.save(new Movie(
                     data.get(0), //nome
                     data.get(1), //gênero
                     (new SimpleDateFormat("dd/MM/yyyy")).parse(data.get(2)), //data

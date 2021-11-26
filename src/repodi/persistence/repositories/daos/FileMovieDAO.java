@@ -1,5 +1,6 @@
-package repodi.persistence.daos;
+package repodi.persistence.repositories.daos;
 
+import org.jetbrains.annotations.NotNull;
 import repodi.persistence.exceptions.MovieNotFoundException;
 import repodi.persistence.beans.Movie;
 
@@ -16,7 +17,7 @@ public class FileMovieDAO implements MovieDAO{
         FILE_PATH = filename;
     }
 
-    public void saveMovie(Movie movie) throws IOException{
+    public void add(Movie movie) throws IOException{
         FileWriter fileWriter = new FileWriter(FILE_PATH, true);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
@@ -32,7 +33,12 @@ public class FileMovieDAO implements MovieDAO{
         fileWriter.close();
     }
 
-    public Movie searchMovie(String uuid) throws MovieNotFoundException {
+    @Override
+    public void update(@NotNull Movie movie) throws Exception {
+        //TODO: implementar método de atualização
+    }
+
+    public Movie select(String uuid) throws MovieNotFoundException {
         Movie movie = null;
         String[] info;
 
@@ -64,7 +70,7 @@ public class FileMovieDAO implements MovieDAO{
         }
     }
 
-    public List<Movie> searchAll() throws MovieNotFoundException{
+    public List<Movie> selectAll() throws MovieNotFoundException{
         List<Movie> movieList = new ArrayList<>();
         String[] info;
 

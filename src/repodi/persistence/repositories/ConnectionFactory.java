@@ -1,4 +1,4 @@
-package repodi.persistence;
+package repodi.persistence.repositories;
 
 import repodi.Property;
 import repodi.PropertyUtils;

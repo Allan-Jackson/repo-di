@@ -1,7 +1,7 @@
-package repodi.persistence.daos;
+package repodi.persistence.repositories.daos;
 
 import org.jetbrains.annotations.NotNull;
-import repodi.persistence.ConnectionFactory;
+import repodi.persistence.repositories.ConnectionFactory;
 import repodi.persistence.exceptions.MovieNotFoundException;
 import repodi.persistence.beans.Movie;
 
@@ -15,9 +15,9 @@ public class MySqlMovieDAO implements MovieDAO{
     private final String ADD_MOVIE = "INSERT INTO TB_MOVIE(id_movie,name,genre,release_date,director) VALUES(?, ?, ?, ?, ?);";
     private final String CLEAR_MOVIES = "TRUNCATE TABLE TB_MOVIE";
     private final String GET_MOVIE_BY_ID = "SELECT * FROM TB_MOVIE WHERE id_movie= ?";
+    private final String UPD_MOVIE = "UPDATE TB_MOVIE SET name=?,genre=?,release_date=?,director=? WHERE id_movie=?";
 
-
-    public List<Movie> searchAll() throws MovieNotFoundException {
+    public List<Movie> selectAll() throws MovieNotFoundException {
         List<Movie> movieList = new ArrayList<>();
         //try with resources automatically will close stm and result
         try (Connection connection = ConnectionFactory.getConnection();
@@ -38,7 +38,7 @@ public class MySqlMovieDAO implements MovieDAO{
             throw new MovieNotFoundException("Um problema de operação ocorreu com o banco de dados", e);
         }
     }
-    public void saveMovie(@NotNull Movie movie) throws Exception {
+    public void add(@NotNull Movie movie) throws Exception {
         try(Connection connection = ConnectionFactory.getConnection();
             PreparedStatement stm = connection.prepareStatement(ADD_MOVIE);){
             stm.setString(1, UUID.randomUUID().toString());
@@ -51,7 +51,23 @@ public class MySqlMovieDAO implements MovieDAO{
             throw new Exception(e);
         }
     }
-    public Movie searchMovie(@NotNull String uuid) throws MovieNotFoundException{
+
+    @Override
+    public void update(@NotNull Movie movie) throws Exception {
+        try(Connection connection = ConnectionFactory.getConnection();
+            PreparedStatement stm = connection.prepareStatement(UPD_MOVIE);){
+            stm.setString(1, movie.getMovieName());
+            stm.setString(2, movie.getMovieGenre());
+            stm.setDate(3, new Date(movie.getMovieDate().getTime()));
+            stm.setString(4, movie.getMovieDirector());
+            stm.setString(5, movie.getUuid());
+            var affectedRows = stm.executeUpdate();
+        }catch(SQLException e){
+            throw new Exception(e);
+        }
+    }
+
+    public Movie select(@NotNull String uuid) throws MovieNotFoundException{
         try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement stm = connection.prepareStatement(GET_MOVIE_BY_ID);) {
             stm.setString(1,uuid);
