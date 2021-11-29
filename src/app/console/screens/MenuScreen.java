@@ -2,6 +2,7 @@ package app.console.screens;
 
 import app.console.ChoiceHandler;
 import app.console.Menu;
+import app.console.UpdateMovieScreen;
 import app.console.constants.Constants;
 
 
@@ -19,6 +20,7 @@ public class MenuScreen extends BaseScreen {
     void configureMenu(){
         mMenu.setMenuTitle(Constants.MOVIE_REPOSITORY_MANAGER);
         mMenu.addItemToMenu(Constants.ADD_MOVIE);
+        mMenu.addItemToMenu(Constants.UPD_MOVIE);
         mMenu.addItemToMenu(Constants.LIST_MOVIES);
         mMenu.addItemToMenu(Constants.SEARCH_MOVIE);
         mMenu.addItemToMenu(Constants.CLEAR_ALL);
@@ -31,6 +33,9 @@ public class MenuScreen extends BaseScreen {
                 switch (opText) {
                     case Constants.ADD_MOVIE:
                         startScreen(AddMovieScreen.class);
+                        break;
+                    case Constants.UPD_MOVIE:
+                        startScreen(UpdateMovieScreen.class);
                         break;
                     case Constants.LIST_MOVIES:
                         startScreen(ListMovieScreen.class);

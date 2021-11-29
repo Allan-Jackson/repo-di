@@ -5,6 +5,8 @@ import repodi.persistence.exceptions.MovieNotFoundException;
 import repodi.persistence.beans.Movie;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +37,45 @@ public class FileMovieDAO implements MovieDAO{
 
     @Override
     public void update(@NotNull Movie movie) throws Exception {
-        //TODO: implementar método de atualização
+        String[] info;
+        int lineNumber = 0;
+        boolean exists = false;
+
+        try (FileReader fR = new FileReader(FILE_PATH); BufferedReader bR = new BufferedReader(fR)) {
+            while (bR.ready()) {
+                var line = bR.readLine().strip();
+                if (!line.isEmpty() && !line.isBlank()) {
+                    info = line.split(";");
+                    if (info[0].equals(movie.getUuid())) {
+                        exists = true;
+                        break;
+                    }
+                    lineNumber++;
+                }
+            }
+            //verifica se o filme com o UUID passado foi encontrado
+            if (exists) {
+                Path path = Path.of(FILE_PATH);
+                var dateFormatter = new SimpleDateFormat("yyyy/MM/dd");
+                String updatedInfo = String.format("%s;%s;%s;%s;%s",
+                        movie.getUuid(),
+                        movie.getMovieName(),
+                        movie.getMovieGenre(),
+                        dateFormatter.format(movie.getMovieDate()),
+                        movie.getMovieDirector());
+                List<String> linhas = Files.readAllLines(path);
+                linhas.remove(lineNumber);
+                linhas.add(lineNumber, updatedInfo);
+                Files.write(path, linhas);
+            } else {
+                throw new MovieNotFoundException("Não existe um filme com o UUID informado.");
+            }
+        }catch (Exception e) {
+            throw new MovieNotFoundException("Houve um problema na leitura do arquivo de filmes.", e);
+        }
     }
 
-    public Movie select(String uuid) throws MovieNotFoundException {
+    public Movie select(@NotNull String uuid) throws MovieNotFoundException {
         Movie movie = null;
         String[] info;
 

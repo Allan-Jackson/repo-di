@@ -14,6 +14,8 @@ public class ScreenInitializer implements IScreenInitializer{
     private final String LIST_MOVIE_SCREEN = "ListMovieScreen";
     private final String SEARCH_MOVIE_SCREEN = "SearchMovieScreen";
     private final String CLEAR_ALL_SCREEN = "ClearAllScreen";
+    private final String UPD_MOVIE_SCREEN = "UpdateMovieScreen";
+
 
     @Override
     public <T extends IScreen> T getInstance(@NotNull Class<T> clazz) throws Exception {
@@ -25,23 +27,27 @@ public class ScreenInitializer implements IScreenInitializer{
               break;
             case LIST_MOVIE_SCREEN:
                 retorno = clazz.getConstructor(MovieRepository.class)
-                        .newInstance(new MovieRepository(new MySqlMovieDAO()));
+                        .newInstance(new MovieRepository(new FileMovieDAO(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name()))));
                 break;
             case ADD_MOVIE_SCREEN:
                 retorno = clazz.getConstructor(MovieRepository.class)
-                        .newInstance(new MovieRepository(new MySqlMovieDAO()));
+                        .newInstance(new MovieRepository(new FileMovieDAO(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name()))));
                 break;
             case SEARCH_MOVIE_SCREEN:
                 retorno = clazz.getConstructor(MovieRepository.class)
-                        .newInstance(new MovieRepository(new MySqlMovieDAO()));
+                        .newInstance(new MovieRepository(new FileMovieDAO(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name()))));
                 break;
             case CLEAR_ALL_SCREEN:
                 retorno = clazz.getConstructor(MovieRepository.class)
-                        .newInstance(new MovieRepository(new MySqlMovieDAO()));
+                        .newInstance(new MovieRepository(new FileMovieDAO(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name()))));
+                break;
+            case UPD_MOVIE_SCREEN:
+                retorno = clazz.getConstructor(MovieRepository.class)
+                        .newInstance(new MovieRepository(new FileMovieDAO(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name()))));
                 break;
             default:
-                retorno = clazz.getConstructor(MovieDAO.class)
-                        .newInstance(new FileMovieDAO(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name())));
+                retorno = clazz.getConstructor(MovieRepository.class)
+                        .newInstance(new MovieRepository(new FileMovieDAO(PropertyUtils.getString(Property.MOVIE_DATABASE_FILENAME.name()))));
         }
 
         return retorno;

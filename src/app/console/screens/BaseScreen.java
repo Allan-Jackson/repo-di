@@ -29,7 +29,7 @@ public abstract class BaseScreen<A extends IScreen> implements IScreen {
      * Redireciona para a Screen especificada no atributo {@link BaseScreen#mainScreen}, após a exibição da mensagem informada.
      * @param msg a mensagem para ser exibida antes do redirecionamento.
      */
-    protected void returnToMain(String msg) {
+    protected void returnToMain(String msg){
         try{
             var scanner = new Scanner(System.in);
             System.out.println("\n"+msg+" ");

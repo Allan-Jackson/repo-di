@@ -17,9 +17,7 @@ public class MovieRepository {
     }
 
     public void save(@NotNull Movie movie) throws Exception{
-        var movieList = movieDao.selectAll();
-        var exists = movieList.contains(movie);
-        if(exists){
+        if(movie.getUuid()!=null){
             movieDao.update(movie);
         }else{
             movieDao.add(movie);
